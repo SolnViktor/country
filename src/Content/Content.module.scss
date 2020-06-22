@@ -1,3 +1,30 @@
 .content {
-  margin-top: 50px;
+  margin: 50px auto 0;
+  width: 90%;
+
+  padding: 10px;
+  background-image: linear-gradient(to right, #7474BF, #348AC7);
+  .flag {
+
+    & img {
+      display: block;
+      height: 80px;
+      width: 120px;
+    }
+  }
+  .country_name {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  .item {
+    margin-top: 10px;
+  }
+
+  .timezone {
+    padding-right: 10px;
+  }
+  .currency_list {
+    margin: 0;
+  }
+
 }
