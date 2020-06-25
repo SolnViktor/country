@@ -294,13 +294,9 @@ export const countryNameReducer = (state = initialState, action) => {
 export const setCountry = (payload) => ({type: SET_COUNTRY, payload});
 export const setCurrentCountry = (payload) => ({type: SET_CURRENT_COUNTRY, payload})
 
-export const getCountryDescription = () => {
-
-}
-
-export const getCountryDescriptionByName = (countryIdentify) => async (dispatch) => {
+export const getCountryDescription = async(countryIdentify, dispatch, ApiResponse) => {
     try {
-        let response = await getCountryByName(countryIdentify); // объединить повторяющийся код
+        let response = await ApiResponse(countryIdentify); // общий код для getCountryDescriptionByName и getCountryDescriptionByCode
         dispatch(setCountry(...response))
         dispatch(setCurrentCountry(...response))
     } catch (error) {
@@ -308,14 +304,13 @@ export const getCountryDescriptionByName = (countryIdentify) => async (dispatch)
     }
 }
 
+export const getCountryDescriptionByName = (countryIdentify) => async (dispatch) => {
+    await getCountryDescription(countryIdentify, dispatch, getCountryByName);
+}
+
 export const getCountryDescriptionByCode = (countryIdentify) => async (dispatch) => {
-    try {
-        let response = await getCountryByCode(countryIdentify);  // объединить повторяющийся код
-        dispatch(setCountry(response))
-        dispatch(setCurrentCountry(...response))
-    } catch (error) {
-        alert(error)
-    }
+    await getCountryDescription(countryIdentify, dispatch, getCountryByName);
+
 }
 
 
